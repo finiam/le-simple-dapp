@@ -7,7 +7,6 @@ export const walletClient = createWalletClient({
 });
 
 export const publicClient = createPublicClient({
-  chain: goerli,
-  // transport: http( Infura / Alchemy / etc URL ),
-  transport: http(),
+  chain: goerli,  
+  transport: http(), // http( Infura / Alchemy / etc URL, or default provider )
 });

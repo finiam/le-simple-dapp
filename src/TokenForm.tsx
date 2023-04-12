@@ -1,6 +1,6 @@
 import { FormEvent, useEffect, useState } from "react";
 import { Address, formatUnits, parseUnits } from "viem";
-import { abi } from "./assets/abi";
+import { abi } from "./data/abi";
 import { publicClient, walletClient } from "./lib/client";
 
 const contractInfo = {
