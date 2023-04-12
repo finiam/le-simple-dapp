@@ -12,7 +12,7 @@ function App() {
       {account ? (
         <>
           <p>Hello, {account}</p>
-          <TokenForm address={account} />
+          <TokenForm account={account} />
         </>
       ) : (
         <Connect setAccount={setAccount} />

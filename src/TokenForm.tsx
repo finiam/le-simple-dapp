@@ -3,18 +3,20 @@ import { Address, formatUnits, parseUnits } from "viem";
 import { abi } from "./assets/abi";
 import { publicClient, walletClient } from "./lib/client";
 
-const USDC_CONTRACT = "0x7b8E5E828480B1D6ea62f0194E565982285ffe67";
+const contractInfo = {
+  address: "0x7b8E5E828480B1D6ea62f0194E565982285ffe67",
+  abi,
+} as const;
 
-export default function TokenForm({ address }: { address: Address }) {
+export default function TokenForm({ account }: { account: Address }) {
   const [status, setStatus] = useState("");
   const [balance, setBalance] = useState<bigint>();
 
   async function getBalance() {
     const bal = await publicClient.readContract({
-      address: USDC_CONTRACT,
-      abi,
+      ...contractInfo,
       functionName: "balanceOf",
-      args: [address],
+      args: [account],
     });
 
     if (bal) setBalance(bal);
@@ -32,9 +34,8 @@ export default function TokenForm({ address }: { address: Address }) {
 
     try {
       const { request } = await publicClient.simulateContract({
-        address: USDC_CONTRACT,
-        account: address,
-        abi,
+        ...contractInfo,
+        account: account,
         functionName: "transfer",
         args: [to, amountParsed],
       });
